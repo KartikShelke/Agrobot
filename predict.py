@@ -5,7 +5,7 @@ from tensorflow.keras.preprocessing.image import img_to_array
 import cv2
 
 # Load model
-model = tf.keras.models.load_model("model/agrobot.h5")
+model = tf.keras.models.load_model("agrobot_disease_model2.h5")
 
 # Class labels (update according to your model)
 CLASS_LABELS = ["fallen_leaf", "healthy", "powdery", "rust"]
