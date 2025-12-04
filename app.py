@@ -172,27 +172,37 @@ def generate_pdf(pil_img: Image.Image, disease: str, confidence: float, info: di
     pdf = FPDF()
     pdf.add_page()
     pdf.set_font("Arial", 'B', 16)
-    pdf.cell(0, 10, "AgroBot — Plant Disease Report", ln=True, align="C")
+
+    # PDF TITLE (ASCII only)
+    pdf.cell(0, 10, "AgroBot Plant Disease Report", ln=True, align="C")
     pdf.ln(6)
 
     pdf.set_font("Arial", size=12)
+
+    # ALL ASCII — remove emojis
     pdf.cell(0, 8, f"Disease: {info['title']}", ln=True)
     pdf.cell(0, 8, f"Predicted Label: {disease}", ln=True)
     pdf.cell(0, 8, f"Confidence: {confidence*100:.2f}%", ln=True)
     pdf.ln(4)
+
     pdf.multi_cell(0, 6, f"Description: {info['desc']}")
     pdf.ln(3)
     pdf.multi_cell(0, 6, f"Suggested Action: {info['advice']}")
     pdf.ln(6)
 
-    # insert image
-    img_bytes = pil_image_to_bytes(pil_img, quality=pdf_quality)
-    # write image to temporary buffer that FPDF can read from
-    pdf.image(BytesIO(img_bytes), x=15, w=180)
+    # Insert leaf image
+    # Convert to JPG bytes
+    bio = BytesIO()
+    pil_img.save(bio, format="JPEG", quality=85)
+    bio.seek(0)
+
+    pdf.image(bio, x=15, w=180)
+
     out = BytesIO()
     pdf.output(out)
     out.seek(0)
     return out
+
 
 # -------------------------
 # Main input & prediction flow
