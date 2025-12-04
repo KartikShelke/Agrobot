@@ -129,7 +129,7 @@ with st.sidebar:
     show_info = st.checkbox("Show disease info after prediction", value=True)
     pdf_quality = st.select_slider("PDF Image Quality", ["Low", "Medium", "High"], value="Medium")
     st.markdown("---")
-    st.caption("AgroBot — Plant disease detection UI\nMade with ❤️")
+    st.caption("AgroBot — Plant disease detection UI\nMade by Krushna")
 
 # -------------------------
 # Header
@@ -303,4 +303,4 @@ if prediction_result:
 # -------------------------
 # Footer
 # -------------------------
-st.markdown("<div class='footer'>Made with ❤️ • AgroBot Plant Disease Detector • Tip: Use consistent lighting & camera height (20–30 cm)</div>", unsafe_allow_html=True)
+st.markdown("<div class='footer'>Made by Krushna Nirmal • AgroBot Plant Disease Detector </div>", unsafe_allow_html=True)
